@@ -1,37 +1,27 @@
-<div class="container">
-    <header class="header">
-        <h1 class="main-title">¡Hola! Soy <span class="highlight">Nexus QA</span>, tu copiloto de élite para la Estrategia de Calidad.</h1>
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='favicon.png') }}" class="logo">
-            <div class="logo-text"><strong>Nexus QA</strong><br><small>By Cirley Salazar</small></div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>OpenAI Assistant</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="chat-container">        
+        <div id="thread-history">
+            <h3>Chat History</h3>
+            <div id="messages-container"></div>
         </div>
-    </header>
-
-    <div class="chat-section">
-        <div id="chat-history" class="chat-box"></div>
+        <!-- <div id="thread-id">Thread ID: None</div> -->
+        <textarea id="user-input" placeholder="Type your question here..."></textarea>
+        <div id="button-container">
+            <button id="new-thread-btn">New Chat</button>
+            <button id="send-btn">Send</button>
+            <button id="voice-input-btn">🎤</button>
+            <input type="file" id="file-input" multiple style="display: none;" />
+            <label for="file-input" id="file-input-label">📂 0 Files</label>
+        </div>        
+        <div id="logs"></div>
     </div>
-
-    <div class="input-section">
-        <textarea id="user-input" class="input-textarea" placeholder="Escribe tu consulta de estrategia aquí..."></textarea>
-        
-        <div class="actions-row">
-            <div class="file-info">
-                <span>📁 0 Archivos</span>
-            </div>
-            
-            <div class="button-group">
-                <button id="new-chat-btn" class="btn btn-secondary">Nuevo Chat</button>
-                <button id="send-btn" class="btn btn-primary">Enviar</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="footer-links">
-            <a href="https://cirleysalazar.notion.site/Nexus-QA-El-copiloto-estrat-gico-para-Testers-que-hablan-el-lenguaje-del-negocio-3342418fdd5180579bb1c019537be4a1" target="_blank" class="footer-link">Conoce a los Coach</a>
-            <span class="separator">|</span>
-            <a href="https://cirleysalazar.notion.site/3342418fdd51804e886fe73e3da7844d" target="_blank" class="footer-link">Mejora Continua (Feedback)</a>
-        </div>
-        <p class="footer-credits">Hecho con ❤️ Por Cirley Salazar | 2026 © Todos los Derechos Reservados.</p>
-    </footer>
-</div>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
