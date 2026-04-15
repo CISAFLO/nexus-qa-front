@@ -2,6 +2,7 @@ flask
 openai
 gunicorn
 paramiko
+python-dotenv
 six==1.15.0
 future==0.18.2
 altgraph==0.17.2
