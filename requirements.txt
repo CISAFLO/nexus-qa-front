@@ -6,8 +6,4 @@ python-dotenv
 six==1.15.0
 future==0.18.2
 altgraph==0.17.2
-<<<<<<< HEAD
 macholib==1.15.2
-=======
-macholib==1.15.2
->>>>>>> master
