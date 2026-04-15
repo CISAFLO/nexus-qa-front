@@ -1,32 +1,37 @@
-/* Estilos Globales - Definición de colores y fuente */
+/* Estilos Globales - Fondo Blanco y Diseño Single Page */
 :root {
-    --bg-color: #121212; /* Fondo muy oscuro, sofisticado */
-    --text-color: #e0e0e0; /* Texto claro pero suave */
-    --primary-color: #007bff; /* Azul brillante para botones principales */
-    --secondary-color: #6c757d; /* Gris para botones secundarios */
-    --border-color: #333; /* Color de bordes sutil */
-    --chat-bg: #1e1e1e; /* Fondo de la caja de chat un poco más claro */
-    --font-family: 'Inter', sans-serif; /* Fuente moderna y profesional */
+    --bg-color: #ffffff; /* Fondo Blanco Limpio */
+    --text-color: #333333;
+    --primary-color: #007bff; /* Azul Nexus QA */
+    --secondary-color: #6c757d;
+    --border-color: #e0e0e0;
+    --chat-bg: #fdfdfd;
+    --font-family: 'Inter', sans-serif;
 }
 
-body {
+/* Forzar que el cuerpo ocupe exactamente la pantalla sin scroll */
+body, html {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--font-family);
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
     display: flex;
-    justify-content: center; /* Centra todo el contenido */
-    min-height: 100vh;
+    justify-content: center;
+    overflow: hidden; /* Evita que la página se mueva */
 }
 
-/* Contenedor Principal Centrado */
+/* Contenedor Principal Ajustable */
 .container {
     width: 100%;
-    max-width: 1000px; /* Ancho máximo para que no se estire demasiado */
+    max-width: 1100px;
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    padding: 10px 20px;
+    box-sizing: border-box; /* Asegura que el padding no añada tamaño extra */
 }
 
 /* Encabezado */
@@ -35,14 +40,18 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 .main-title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     margin: 0;
-    max-width: 70%;
+}
+
+/* RESALTADO AZUL PARA NEXUS QA */
+.highlight {
+    color: var(--primary-color);
 }
 
 .logo-container {
@@ -52,79 +61,87 @@ body {
 }
 
 .logo {
-    width: 60px;
+    width: 45px;
     height: auto;
 }
 
 .logo-text {
     font-weight: 600;
-    line-height: 1.2;
-}
-
-.logo-text small {
-    font-weight: 400;
-    color: #888;
-}
-
-/* Sección de Chat */
-.chat-section {
-    flex-grow: 1;
-}
-
-.section-title {
+    line-height: 1.1;
     font-size: 14px;
-    color: #888;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+}
+
+/* Sección de Chat - Se estira para ocupar el centro */
+.chat-section {
+    flex: 1; /* Esto hace que el chat ocupe todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    min-height: 0; /* Necesario para que el scroll interno funcione */
 }
 
 .chat-box {
+    flex: 1;
     background-color: var(--chat-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    height: 400px; /* Altura fija para el historial */
-    overflow-y: auto; /* Scroll si el chat es largo */
-    padding: 20px;
+    overflow-y: auto; /* El scroll solo sucede aquí adentro */
+    padding: 15px;
 }
 
-/* Área de Entrada */
+/* Área de Entrada y Acciones */
 .input-section {
-    background-color: var(--chat-bg);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    padding: 10px;
+    background-color: #fff;
+    margin-bottom: 5px;
 }
 
 .input-textarea {
     width: 100%;
-    height: 80px;
-    background-color: #2a2a2a;
+    height: 50px;
+    background-color: #f9f9f9;
     border: 1px solid var(--border-color);
     border-radius: 4px;
     color: var(--text-color);
-    padding: 10px;
+    padding: 8px;
     font-family: inherit;
-    resize: none; /* Evita que el usuario lo estire */
-    box-sizing: border-box; /* Importante para el padding */
+    resize: none;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+/* FILA DE ACCIONES: Archivos a la izquierda, Botones a la derecha */
+.actions-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #555;
+    font-weight: 600;
+    font-size: 13px;
 }
 
 .button-group {
     display: flex;
-    justify-content: flex-end; /* Botones a la derecha */
-    gap: 10px;
+    gap: 8px;
 }
 
-/* Estilos de Botones Profesionales */
+/* Botones */
 .btn {
-    padding: 10px 20px;
+    padding: 8px 16px;
     border: none;
     border-radius: 4px;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-size: 13px;
 }
 
 .btn-primary {
@@ -132,47 +149,35 @@ body {
     color: white;
 }
 
-.btn-primary:hover {
-    background-color: #0056b3;
-}
-
 .btn-secondary {
     background-color: var(--secondary-color);
     color: white;
 }
 
-.btn-secondary:hover {
-    background-color: #5a6268;
-}
-
-/* Información de Archivos */
-.file-info {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: #888;
-    font-size: 14px;
-}
-
-/* Pie de Página */
+/* Pie de Página Compacto */
 .footer {
     text-align: center;
-    font-size: 12px;
-    color: #888;
+    font-size: 11px;
+    color: #777;
     border-top: 1px solid var(--border-color);
-    padding-top: 20px;
-    margin-top: auto;
+    padding: 8px 0;
+}
+
+.footer-links {
+    margin-bottom: 3px;
 }
 
 .footer-link {
-    color: #007bff;
+    color: var(--primary-color);
     text-decoration: none;
+    font-weight: 600;
 }
 
-.footer-link:hover {
-    text-decoration: underline;
+.separator {
+    margin: 0 5px;
+    color: #ccc;
 }
 
 .footer-credits {
-    margin-top: 10px;
+    margin: 0;
 }

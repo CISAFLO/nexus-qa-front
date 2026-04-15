@@ -1,49 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus QA - Tu Copiloto de Élite</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <header class="header">
-            <h1 class="main-title">¡Hola! Soy Nexus QA, tu copiloto de élite para la Estrategia de Calidad.</h1>
-            <div class="logo-container">
-                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Nexus QA" class="logo">
-                <span class="logo-text">Nexus QA<br><small>By Quality Design</small></span>
-            </div>
-        </header>
-
-        <div class="chat-section">
-            <h2 class="section-title">Chat History</h2>
-            <div id="chat-history" class="chat-box">
-                </div>
+<div class="container">
+    <header class="header">
+        <h1 class="main-title">¡Hola! Soy <span class="highlight">Nexus QA</span>, tu copiloto de élite para la Estrategia de Calidad.</h1>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='favicon.png') }}" class="logo">
+            <div class="logo-text"><strong>Nexus QA</strong><br><small>By Cirley Salazar</small></div>
         </div>
+    </header>
 
-        <div class="input-section">
-            <textarea id="user-input" placeholder="Escribe tu consulta de estrategia aquí..." class="input-textarea"></textarea>
+    <div class="chat-section">
+        <div id="chat-history" class="chat-box"></div>
+    </div>
+
+    <div class="input-section">
+        <textarea id="user-input" class="input-textarea" placeholder="Escribe tu consulta de estrategia aquí..."></textarea>
+        
+        <div class="actions-row">
+            <div class="file-info">
+                <span>📁 0 Archivos</span>
+            </div>
             
             <div class="button-group">
                 <button id="new-chat-btn" class="btn btn-secondary">Nuevo Chat</button>
                 <button id="send-btn" class="btn btn-primary">Enviar</button>
             </div>
-
-            <div class="file-info">
-                <span class="file-icon">📁</span>
-                <span class="file-count">0 Archivos</span>
-            </div>
         </div>
-
-        <footer class="footer">
-            <a href="#" class="footer-link">Conoce a los Coach</a> | 
-            <a href="#" class="footer-link">Mejora Continua (Feedback)</a>
-            <p class="footer-credits">Hecho con ❤️ Por Cirley Salazar - 2026 © Todos los Derechos Reservados.</p>
-        </footer>
     </div>
 
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://cirleysalazar.notion.site/Nexus-QA-El-copiloto-estrat-gico-para-Testers-que-hablan-el-lenguaje-del-negocio-3342418fdd5180579bb1c019537be4a1" target="_blank" class="footer-link">Conoce a los Coach</a>
+            <span class="separator">|</span>
+            <a href="https://cirleysalazar.notion.site/3342418fdd51804e886fe73e3da7844d" target="_blank" class="footer-link">Mejora Continua (Feedback)</a>
+        </div>
+        <p class="footer-credits">Hecho con ❤️ Por Cirley Salazar | 2026 © Todos los Derechos Reservados.</p>
+    </footer>
+</div>
