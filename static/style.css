@@ -214,3 +214,31 @@ pre {
     padding: 1em;
     overflow-x: auto; /* For very long lines in code blocks */
 }
+
+/* Estilos para el saludo de Nexus QA */
+#welcome-header {
+    text-align: center;
+    padding: 10px 0 20px 0;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+#welcome-header h1 {
+    font-size: 1.6rem;
+    margin: 0;
+    color: #ffffff;
+    letter-spacing: 1px;
+}
+
+#welcome-header h1 span {
+    color: #5c6bc0; /* Usando el mismo color de tus botones para consistencia */
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#welcome-header p {
+    font-size: 1rem;
+    color: #aaa;
+    margin-top: 5px;
+    font-weight: 300;
+}
