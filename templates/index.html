@@ -1,32 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Nexus QA - Copiloto de Estrategia</title> <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus QA - Tu Copiloto de Élite</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="chat-container">
-        <div id="welcome-header">
-            <h1>¡Hola! Soy <span>Nexus QA</span></h1>
-            <p>Tu copiloto de élite para la Estrategia de Calidad.</p>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">¡Hola! Soy Nexus QA, tu copiloto de élite para la Estrategia de Calidad.</h1>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Nexus QA" class="logo">
+                <span class="logo-text">Nexus QA<br><small>By Quality Design</small></span>
+            </div>
+        </header>
+
+        <div class="chat-section">
+            <h2 class="section-title">Chat History</h2>
+            <div id="chat-history" class="chat-box">
+                </div>
         </div>
 
-        <div id="thread-history">
-            <h3>Chat History</h3>
-            <div id="messages-container"></div>
+        <div class="input-section">
+            <textarea id="user-input" placeholder="Escribe tu consulta de estrategia aquí..." class="input-textarea"></textarea>
+            
+            <div class="button-group">
+                <button id="new-chat-btn" class="btn btn-secondary">Nuevo Chat</button>
+                <button id="send-btn" class="btn btn-primary">Enviar</button>
+            </div>
+
+            <div class="file-info">
+                <span class="file-icon">📁</span>
+                <span class="file-count">0 Archivos</span>
+            </div>
         </div>
-        
-        <textarea id="user-input" placeholder="¿En qué estrategia de calidad trabajaremos hoy?"></textarea>
-        
-        <div id="button-container">
-            <button id="new-thread-btn">New Chat</button>
-            <button id="send-btn">Send</button>
-            <button id="voice-input-btn">🎤</button>
-            <input type="file" id="file-input" multiple style="display: none;" />
-            <label for="file-input" id="file-input-label">📂 0 Files</label>
-        </div>        
-        <div id="logs"></div>
+
+        <footer class="footer">
+            <a href="#" class="footer-link">Conoce a los Coach</a> | 
+            <a href="#" class="footer-link">Mejora Continua (Feedback)</a>
+            <p class="footer-credits">Hecho con ❤️ Por Cirley Salazar - 2026 © Todos los Derechos Reservados.</p>
+        </footer>
     </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

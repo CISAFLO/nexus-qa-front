@@ -1,244 +1,178 @@
-body, html {
-    width: 100%;
-    height: 100%;
+/* Estilos Globales - Definición de colores y fuente */
+:root {
+    --bg-color: #121212; /* Fondo muy oscuro, sofisticado */
+    --text-color: #e0e0e0; /* Texto claro pero suave */
+    --primary-color: #007bff; /* Azul brillante para botones principales */
+    --secondary-color: #6c757d; /* Gris para botones secundarios */
+    --border-color: #333; /* Color de bordes sutil */
+    --chat-bg: #1e1e1e; /* Fondo de la caja de chat un poco más claro */
+    --font-family: 'Inter', sans-serif; /* Fuente moderna y profesional */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-family);
     margin: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #121212;
-    color: #ffffff;
+    padding: 20px;
+    display: flex;
+    justify-content: center; /* Centra todo el contenido */
+    min-height: 100vh;
+}
+
+/* Contenedor Principal Centrado */
+.container {
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo para que no se estire demasiado */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Encabezado */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.main-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    max-width: 70%;
+}
+
+.logo-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-}
-
-#chat-container {
-    width: 100%; /* Increase width */
-    max-width: 1200px; /* Increase max-width for larger screens */
-    max-height: 100vh; /* 100% of the viewport height */
-    height: auto; /* Adjust height to auto for natural expansion */
-    min-height: 600px; /* Minimum height to ensure container visibility */
-    margin: 2% auto; /* Add some margin at the top and bottom */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-radius: 8px;
-    background-color: #202124;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 20px;
-}
-
-.User {
-    color: green;
-}
-
-.Assistant {
-    color: red;
-}
-
-#thread-history {
-    flex-grow: 1;
-    min-height: 200px; /* or any other value that fits well in your layout */
-    overflow-y: auto;
-    margin: 20px 0; /* Add more vertical space */
-    padding: 20px; /* Increase padding for spacing */
-    border-radius: 8px;
-    background: #333333;
-}
-
-#thread-history h3 {
-    color: #aaa;
-    margin-bottom: 20px; /* Add space below the title */
-}
-
-#messages-container {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
 }
 
-#user-input {
-    width: calc(100% - 20px); /* Subtract padding from width calculation */
-    height: 50px;
-    border: 1px solid #555; /* Add a border for definition */
-    border-radius: 8px;
-    padding: 10px;
-    font-size: 16px;
-    margin-top: 20px; /* Space between the input and the messages above */
-    flex-shrink: 0;
-    position: sticky;
-    bottom: 0;
-    z-index: 10;
+.logo {
+    width: 60px;
+    height: auto;
 }
 
-#button-container {
-    display: flex;
-    justify-content: center; /* Centers the buttons horizontally */
-    gap: 10px; /* Adds space between the buttons */
+.logo-text {
+    font-weight: 600;
+    line-height: 1.2;
 }
 
-#send-btn, #new-thread-btn, #voice-input-btn {
-    flex: 1; /* Each button will take up an equal amount of space */
-    padding: 10px 20px; /* Adjust padding to your liking */
-    margin: 10px 0; /* Retain the margin for spacing */
-    border-radius: 8px; /* Retain the border-radius for rounded corners */
-    background-color: #5c6bc0; /* Retain the background color */
-    color: white; /* Retain the text color */
-    font-size: 16px; /* Retain the font size */
-    cursor: pointer; /* Retain the cursor style */
-    transition: background-color 0.3s; /* Retain the transition for hover effect */
-    width: auto; /* Make the button width dependent on the content */
-    max-width: 200px; /* Set a maximum width for the buttons */
-    display: inline-block; /* Allows the width to be as small as the content requires */
-    margin: 10px auto; /* 'auto' for left and right margins centers the block-level elements */
-    display: flex; /* Make the buttons block-level so 'auto' margins work for horizontal centering */
-    justify-content: center;
-    align-items: center;
+.logo-text small {
+    font-weight: 400;
+    color: #888;
 }
 
-#send-btn:hover, #new-thread-btn:hover, #voice-input-btn:hover {
-    background-color: #3949ab; /* Retain the hover effect */
+/* Sección de Chat */
+.chat-section {
+    flex-grow: 1;
 }
 
-#thread-id {
-    margin: 10px 0;
-    color: #bbbbbb;
-}
-
-#logs {
-    min-height: 50px;
-    padding: 10px;
-    background: #1a1a1a;
-    border-radius: 8px;
-    margin-bottom: 20px; /* Space before the input field */
-}
-
-/* Adjustments for smaller screens */
-@media (max-width: 768px) {
-    #chat-container {
-        width: 95%;
-        min-height: 500px;
-    }
-
-    #user-input, #logs, #thread-history {
-        width: calc(100% - 40px); /* Adjusting for padding */
-    }
-}
-
-/* Loading animation styles */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .loader {
-    border: 2px solid #f3f3f3; /* Light grey, adjust as needed */
-    border-top: 2px solid #3498db; /* Blue color, adjust as needed */
-    border-radius: 50%;
-    width: 16px; /* Adjust to fit within button */
-    height: 16px; /* Adjust to fit within button */
-    animation: spin 2s linear infinite;
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.1);
-        opacity: 0.7;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.voice-recording {
-    animation: pulse 1s infinite;
-}
-
-input[type="file"]#file-input,
-button,
-#file-input-label {
-    margin: 10px 0;
-    padding: 10px 20px; /* Example padding, adjust as needed */
-    font-size: 16px; /* Example font size, adjust as needed */
-    line-height: 1.5; /* Adjust line height as needed */
-    border: 2px solid transparent; /* Adjust or remove border as needed */
-    border-radius: 8px;
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
-    cursor: pointer;
-    transition: background-color 0.3s;
-    display: inline-flex; /* Use flex to center content */
-    align-items: center; /* Center content vertically */
-    justify-content: center; /* Center content horizontally */
-    vertical-align: middle; /* Aligns the element baseline */
-    background-color: #5c6bc0;
-    color: white;
-}
-
-input[type="file"]#file-input {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-#file-input-label {
-    margin-left: 10px; /* Space between this label and other elements */
-    background-color: #FFC107; /* Example color, adjust as needed */
-}
-
-button:hover,
-#file-input-label:hover {
-    background-color: #3949ab; /* Darken button on hover */
-}
-
-/* Example classes for other buttons for consistency */
-button {
-    background-color: #5c6bc0;
-    /* Rest of your button styles */
-}
-
-pre, code {
-    background-color: #858585;
-    border-radius: 4px;
-    /* padding: 0.5em; */
-    font-family: 'Courier New', Courier, monospace;
-    white-space: pre-wrap; /* For <code> in case of long lines */
-}
-
-pre {
-    padding: 1em;
-    overflow-x: auto; /* For very long lines in code blocks */
-}
-
-/* Estilos para el saludo de Nexus QA */
-#welcome-header {
-    text-align: center;
-    padding: 10px 0 20px 0;
-    border-bottom: 1px solid #333;
+.section-title {
+    font-size: 14px;
+    color: #888;
+    text-transform: uppercase;
     margin-bottom: 10px;
 }
 
-#welcome-header h1 {
-    font-size: 1.6rem;
-    margin: 0;
-    color: #ffffff;
-    letter-spacing: 1px;
+.chat-box {
+    background-color: var(--chat-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    height: 400px; /* Altura fija para el historial */
+    overflow-y: auto; /* Scroll si el chat es largo */
+    padding: 20px;
 }
 
-#welcome-header h1 span {
-    color: #5c6bc0; /* Usando el mismo color de tus botones para consistencia */
-    font-weight: bold;
-    text-transform: uppercase;
+/* Área de Entrada */
+.input-section {
+    background-color: var(--chat-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
-#welcome-header p {
-    font-size: 1rem;
-    color: #aaa;
-    margin-top: 5px;
-    font-weight: 300;
+.input-textarea {
+    width: 100%;
+    height: 80px;
+    background-color: #2a2a2a;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-color);
+    padding: 10px;
+    font-family: inherit;
+    resize: none; /* Evita que el usuario lo estire */
+    box-sizing: border-box; /* Importante para el padding */
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end; /* Botones a la derecha */
+    gap: 10px;
+}
+
+/* Estilos de Botones Profesionales */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Información de Archivos */
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #888;
+    font-size: 14px;
+}
+
+/* Pie de Página */
+.footer {
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    margin-top: auto;
+}
+
+.footer-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+.footer-credits {
+    margin-top: 10px;
 }
