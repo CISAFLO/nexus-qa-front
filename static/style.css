@@ -184,4 +184,28 @@ button, #file-input-label {
         height: 100vh;
         border-radius: 0;
     }
+}   
+
+.role-label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+}
+
+/* Color para el nombre de Nexus */
+.role-label.Assistant {
+    color: #27ae60; /* Verde éxito */
+}
+
+/* Color para tu nombre de Estratégia */
+.role-label.User {
+    color: #3498db; /* Azul estratégico */
+}
+
+/* Estilo para el texto dentro de la burbuja */
+.message-text {
+    line-height: 1.5;
 }

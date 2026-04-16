@@ -53,10 +53,10 @@ function addToChatHistory(role, message) {
     const messagesContainer = document.getElementById('messages-container');
     const messageDiv = document.createElement('div');
     messageDiv.classList.add('chat-message');
-    if (role === 'Assistant') {
+    if (role === 'Nexus QA') {
         message = formatAssistantResponse(message); // Format the message if it's from the assistant
     }
-    else if (role === 'User') {
+    else if (role === 'Estratega QA') {
         message = formatMessage(message);
     }
     let roleClass = role === 'User' ? 'User' : 'Assistant';
