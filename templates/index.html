@@ -1,27 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>OpenAI Assistant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus QA | By Cirley Salazar</title>
     <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div id="chat-container">        
+        <header class="chat-header">
+            <div class="brand-info">
+                <h1>Nexus QA</h1>
+                <p>Estratega de Calidad e Inteligencia Artificial</p>
+            </div>
+        </header>
+
         <div id="thread-history">
-            <h3>Chat History</h3>
-            <div id="messages-container"></div>
+            <div id="messages-container">
+                <div class="message assistant">
+                    ¡Hola! Soy Nexus QA. Estoy entrenada en las filosofías de Bach, Bolton y Van Veenendaal para ayudarte a elevar la calidad de tus proyectos. ¿Qué vamos a probar hoy?
+                </div>
+            </div>
         </div>
-        <!-- <div id="thread-id">Thread ID: None</div> -->
-        <textarea id="user-input" placeholder="Type your question here..."></textarea>
-        <div id="button-container">
-            <button id="new-thread-btn">New Chat</button>
-            <button id="send-btn">Send</button>
-            <button id="voice-input-btn">🎤</button>
-            <input type="file" id="file-input" multiple style="display: none;" />
-            <label for="file-input" id="file-input-label">📂 0 Files</label>
-        </div>        
+
+        <div class="input-area">
+            <textarea id="user-input" placeholder="Escribe tu duda técnica o pega un log de error aquí..."></textarea>
+            
+            <div id="button-container">
+                <div class="action-buttons">
+                    <button id="new-thread-btn" title="Iniciar nueva sesión">Nuevo Chat</button>
+                    <button id="voice-input-btn" title="Entrada por voz">🎤</button>
+                    <input type="file" id="file-input" multiple style="display: none;" />
+                    <label for="file-input" id="file-input-label">📂 0 Archivos</label>
+                </div>
+                <button id="send-btn">Enviar a Nexus</button>
+            </div>
+        </div>
+
         <div id="logs"></div>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="https://cirleysalazar.notion.site/Nexus-QA-El-copiloto-estrat-gico-para-Testers-que-hablan-el-lenguaje-del-negocio-3342418fdd5180579bb1c019537be4a1" target="_blank" class="footer-link">Conoce a los Coach</a>
+                <span class="separator">|</span>
+                <a href="https://cirleysalazar.notion.site/3342418fdd51804e886fe73e3da7844d" target="_blank" class="footer-link">Mejora Continua (Feedback)</a>
+            </div>
+            <p class="footer-credits">Hecho con ❤️ Por Cirley Salazar | 2026 © Todos los Derechos Reservados.</p>
+        </footer>
     </div>
+
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
