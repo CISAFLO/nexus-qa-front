@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
-import openai, time, paramiko, json
+from openai import OpenAI
+import time
 import os
 from dotenv import load_dotenv
 
@@ -8,8 +9,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Configuración de OpenAI
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Configuración del Cliente de OpenAI (Sintaxis moderna v1.0+)
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+ASSISTANT_ID = os.getenv("OPENAI_ASSISTANT_ID")
 
 @app.route('/')
 def index():
@@ -18,7 +20,7 @@ def index():
 @app.route('/create_thread', methods=['GET'])
 def create_thread():
     try:
-        thread = openai.beta.threads.create()
+        thread = client.beta.threads.create()
         return jsonify({"thread_id": thread.id})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
@@ -28,43 +30,61 @@ def ask_openai():
     data = request.json
     thread_id = data.get('thread_id')
     user_input = data.get('input')
-    user_files = data.get('file_ids')
+    user_files = data.get('file_ids') # Lista de IDs de archivos previamente subidos
     
     if not user_input and not user_files:
         return jsonify("No input provided"), 400
-    if thread_id == 'None':
+    if not thread_id or thread_id == 'None':
         return jsonify("No thread provided"), 400
         
     try:
-        openai.beta.threads.messages.create(
-            thread_id,
+        # CORRECCIÓN DEL ERROR 'file_ids':
+        # En la API moderna, los archivos se pasan como 'attachments'
+        attachments = []
+        if user_files:
+            for f_id in user_files:
+                attachments.append({
+                    "file_id": f_id,
+                    "tools": [{"type": "file_search"}]
+                })
+
+        # Crear el mensaje en el hilo
+        client.beta.threads.messages.create(
+            thread_id=thread_id,
             role="user",
             content=user_input,
-            file_ids=user_files if user_files else []
+            attachments=attachments if attachments else None
         )
         
-        run = openai.beta.threads.runs.create(
+        # Crear el Run para procesar la respuesta
+        run = client.beta.threads.runs.create(
             thread_id=thread_id,
-            assistant_id=os.environ.get('OPENAI_ASSISTANT_ID')
+            assistant_id=ASSISTANT_ID
         )
         
-        while run.status != 'completed':
-            run = openai.beta.threads.runs.retrieve(thread_id=thread_id, run_id=run.id)
-            if run.status == 'requires_action':
-                # ... (aquí va tu lógica de tool_calls que ya tienes)
-                pass 
-            time.sleep(.5)
+        # Esperar la respuesta (Polling)
+        while run.status in ['queued', 'in_progress', 'cancelling']:
+            time.sleep(1) # Un segundo es más saludable para la tasa de transferencia (rate limits)
+            run = client.beta.threads.runs.retrieve(thread_id=thread_id, run_id=run.id)
             
-        msgs = openai.beta.threads.messages.list(thread_id)
-        return jsonify(msgs.data[0].content[0].text.value)
+            if run.status == 'failed':
+                return jsonify(f"Error en el asistente: {run.last_error}"), 500
+            
+            if run.status == 'requires_action':
+                # Aquí iría tu lógica de funciones si Nexus QA necesita ejecutar código
+                pass 
+            
+        # Recuperar los mensajes y devolver el último
+        msgs = client.beta.threads.messages.list(thread_id=thread_id)
+        # Accedemos al contenido de la respuesta del asistente
+        response_text = msgs.data[0].content[0].text.value
+        return jsonify(response_text)
+
     except Exception as e:
+        print(f"Error detectado: {e}") # Para que lo veas en la terminal de VS Code
         return jsonify(str(e)), 500
 
-# --- Rutas adicionales (get_thread_messages, upload_file, etc.) mantén las que necesites ---
-
-# BLOQUE CRÍTICO PARA RENDER
+# BLOQUE PARA DESPLIEGUE (Render/Railway)
 if __name__ == '__main__':
-    # Render usa la variable de entorno PORT
     port = int(os.environ.get("PORT", 10000))
-    # '0.0.0.0' es obligatorio para que el tráfico externo llegue a la app
     app.run(host='0.0.0.0', port=port, debug=False)
